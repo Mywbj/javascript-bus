@@ -1,0 +1,48 @@
+{
+  "name": "javascript-bus",
+  "description": "javascript-bus is a JavaScript tool for teleporting.",
+  "author": "Myway",
+  "homepage": "https://github.com/Mywbj/javascript-bus",
+  "keywords": [
+    "javascript-bus",
+    "events",
+    "bus",
+    "js",
+    "react",
+    "vue"
+  ],
+  "files": [
+    "src",
+    "dist/*.js",
+    "types/*.d.ts"
+  ],
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "build": "rollup --config",
+    "test": "node ./test/javascript-bus-test.js"
+  },
+  "dependencies": {
+    "@babel/core": "^7.19.3",
+    "@babel/preset-env": "^7.19.4",
+    "rollup": "^3.2.3",
+    "rollup-plugin-uglify": "^6.0.4"
+  },
+  "devDependencies": {
+    "@rollup/plugin-babel": "^6.0.0",
+    "@rollup/plugin-commonjs": "^23.0.0",
+    "@rollup/plugin-node-resolve": "^15.0.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mywbj/javascript-bus.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Mywbj/javascript-bus/issues"
+  }
+}
