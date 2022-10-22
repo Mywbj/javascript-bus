@@ -7,7 +7,7 @@ import { uglify } from 'rollup-plugin-uglify'
 const pak = JSON.parse(fs.readFileSync('./package.json', 'utf8'))
 
 const banner = `/**
- * js-bus v${pak.version}
+ * javascript-bus v${pak.version}
  * https://github.com/Mywbj/js-bus
  * @license MIT
  */`

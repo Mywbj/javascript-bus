@@ -1,7 +1,7 @@
-'use strict';
+'use strict'
 
 if (process.env.NODE_ENV === 'production') {
-  module.exports = require('../dist/javascript-bus.cjs.min.js');
+  module.exports = require('../dist/javascript-bus.cjs.min.js')
 } else {
-  module.exports = require('../dist/javascript-bus.cjs');
+  module.exports = require('../dist/javascript-bus.cjs.js')
 }

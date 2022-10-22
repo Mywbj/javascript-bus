@@ -1,4 +1,4 @@
-import JavascriptBus from "../src/index.js";
+import JavascriptBus from "../dist/javascript-bus.esm.js"
 
 const jsBus = new JavascriptBus()
 
