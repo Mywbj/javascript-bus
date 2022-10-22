@@ -1,6 +1,17 @@
 {
   "name": "javascript-bus",
+  "version": "1.0.2",
   "description": "javascript-bus is a JavaScript tool for teleporting.",
+  "main": "dist/javascript-bus.cjs.js",
+  "module": "dist/javascript-bus.esm.js",
+  "unpkg": "dist/javascript-bus.js",
+  "jsdelivr": "dist/javascript-bus.js",
+  "typings": "types/index.d.ts",
+  "files": [
+    "src",
+    "dist/*.js",
+    "types/*.d.ts"
+  ],
   "author": "Myway",
   "homepage": "https://github.com/Mywbj/javascript-bus",
   "keywords": [
@@ -11,13 +22,6 @@
     "react",
     "vue"
   ],
-  "files": [
-    "src",
-    "dist/*.js",
-    "types/*.d.ts"
-  ],
-  "version": "1.0.0",
-  "main": "src/index.js",
   "license": "MIT",
   "type": "module",
   "scripts": {
