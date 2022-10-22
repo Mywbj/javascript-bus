@@ -1,6 +1,6 @@
 {
   "name": "javascript-bus",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "javascript-bus is a JavaScript tool for teleporting.",
   "main": "dist/javascript-bus.cjs.js",
   "module": "dist/javascript-bus.esm.js",

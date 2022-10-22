@@ -1,5 +1,5 @@
 /**
- * javascript-bus v1.0.2
+ * javascript-bus v1.0.3
  * https://github.com/Mywbj/js-bus
  * @license MIT
  */
@@ -137,7 +137,7 @@ var JavascriptBus = /*#__PURE__*/function () {
         payload[_key2 - 1] = arguments[_key2];
       }
       var isArray = Array.isArray(eventName);
-      if (typeof eventName !== "string" || isArray) {
+      if (!(typeof eventName === "string" || isArray)) {
         throw new TypeError("the event name must be of string or array type");
       }
       if (isArray) {

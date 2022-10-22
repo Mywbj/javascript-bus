@@ -19,8 +19,7 @@ yarn add javascript-bus
 // 引入
 import JsBus from "javascript-bus"
 
-// 创建bus
-const jsBus = new JavascriptBus()
+const jsBus = new JsBus()
 
 function msgFn1(...payload) {
   console.log('msg1:', this, payload)
@@ -36,19 +35,17 @@ function msgFn3(...payload) {
 
 const obj = {name: 'obj'}
 
-// 发起监听, 返回一个取消订阅函数，调用它即可停止监听
-const cancelMsg1 = jsBus.on('msg1', msgFn1, obj)
+jsBus.on('msg1', msgFn1, obj)
 jsBus.on('msg2', msgFn2)
 jsBus.once('msg3', msgFn3)
 
-// 发送事件
 jsBus.emit('msg1', 1, 100)
 jsBus.emit('msg2', 2)
 jsBus.emit('msg3', 3)
 
-// 俩种方式取消监听事件
-// 1.cancelMsg1() 2.jsBus.off('msg1', msgFn1)
-cancelMsg1()
+jsBus.emit(['msg1', 'msg2'], 999)
+
+jsBus.off('msg1', msgFn1)
 
 setTimeout(() => {
   console.log('------setTimeout------')
@@ -56,7 +53,6 @@ setTimeout(() => {
   jsBus.emit('msg2', 2)
   jsBus.emit('msg3', 3)
 }, 2000)
-
 ```
 
 

@@ -69,7 +69,7 @@ class JavascriptBus {
 
   emit(eventName, ...payload) {
     const isArray = Array.isArray(eventName)
-    if (typeof eventName !== "string" || isArray) {
+    if (!(typeof eventName === "string" || isArray)) {
       throw new TypeError("the event name must be of string or array type")
     }
 

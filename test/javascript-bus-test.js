@@ -1,6 +1,6 @@
-import JavascriptBus from "../dist/javascript-bus.esm.js"
+import JsBus from "../dist/javascript-bus.esm.js"
 
-const jsBus = new JavascriptBus()
+const jsBus = new JsBus()
 
 function msgFn1(...payload) {
   console.log('msg1:', this, payload)
@@ -23,6 +23,8 @@ jsBus.once('msg3', msgFn3)
 jsBus.emit('msg1', 1, 100)
 jsBus.emit('msg2', 2)
 jsBus.emit('msg3', 3)
+
+jsBus.emit(['msg1', 'msg2'], 999)
 
 jsBus.off('msg1', msgFn1)
 
