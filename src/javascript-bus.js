@@ -1,4 +1,4 @@
-
+import { changeEmitHanlders } from './utils.js'
 class JavascriptBus {
   constructor() {
     this.eventBus = {}
@@ -48,12 +48,12 @@ class JavascriptBus {
       throw new TypeError("the event name must be string type.")
     }
 
-    if (typeof eventCallback !== "function") {
-      throw new TypeError("the event callback must be function type.")
-    }
-
     let hanlders = this.eventBus[eventName]
     if (hanlders) {
+      if (typeof eventCallback !== "function") {
+        delete this.eventBus[eventName]
+        return
+      }
       const backups = [...hanlders]
       backups.forEach((hanlder, index) => {
         if (hanlder.eventCallback === eventCallback) {
@@ -68,16 +68,22 @@ class JavascriptBus {
   }
 
   emit(eventName, ...payload) {
-    if (typeof eventName !== "string") {
-      throw new TypeError("the event name must be string type.")
+    const isArray = Array.isArray(eventName)
+    if (typeof eventName !== "string" || isArray) {
+      throw new TypeError("the event name must be of string or array type")
     }
 
-    let hanlders = this.eventBus[eventName]
-    if (hanlders) {
-      hanlders.forEach(hanlder => {
-        hanlder.eventCallback.apply(hanlder.pointer, payload)
+    if (isArray) {
+      eventName.forEach(key => {
+        if (typeof key !== "string") {
+          throw new TypeError("the event name must be string type.")
+        }
+        changeEmitHanlders(this.eventBus[key], payload)
       })
+      return
     }
+
+    changeEmitHanlders(this.eventBus[eventName], payload)
   }
 
 }

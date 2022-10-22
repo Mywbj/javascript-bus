@@ -12,21 +12,23 @@ const banner = `/**
  * @license MIT
  */`
 
+ const min = ''
+
 const config = {
   input: './src/javascript-bus.js',
   output: [
     {
-      file: './dist/javascript-bus.esm.js',
+      file: './dist/javascript-bus.esm'+min+'.js',
       format: 'es',
       banner
     },
     {
-      file: './dist/javascript-bus.cjs.js',
+      file: './dist/javascript-bus.cjs'+min+'.js',
       format: 'cjs',
       banner
     },
     {
-      file: './dist/javascript-bus.js',
+      file: './dist/javascript-bus'+min+'.js',
       format: 'umd',
       name: 'JavascriptBus',
       banner,

@@ -1,5 +1,5 @@
 /**
- * javascript-bus v1.0.1
+ * javascript-bus v1.0.2
  * https://github.com/Mywbj/js-bus
  * @license MIT
  */
@@ -51,6 +51,14 @@ function _arrayLikeToArray(arr, len) {
 }
 function _nonIterableSpread() {
   throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
+}
+
+function changeEmitHanlders(hanlders, payload) {
+  if (hanlders) {
+    hanlders.forEach(function (hanlder) {
+      hanlder.eventCallback.apply(hanlder.pointer, payload);
+    });
+  }
 }
 
 var JavascriptBus = /*#__PURE__*/function () {
@@ -106,11 +114,12 @@ var JavascriptBus = /*#__PURE__*/function () {
       if (typeof eventName !== "string") {
         throw new TypeError("the event name must be string type.");
       }
-      if (typeof eventCallback !== "function") {
-        throw new TypeError("the event callback must be function type.");
-      }
       var hanlders = this.eventBus[eventName];
       if (hanlders) {
+        if (typeof eventCallback !== "function") {
+          delete this.eventBus[eventName];
+          return;
+        }
         var backups = _toConsumableArray(hanlders);
         backups.forEach(function (hanlder, index) {
           if (hanlder.eventCallback === eventCallback) {
@@ -125,18 +134,24 @@ var JavascriptBus = /*#__PURE__*/function () {
   }, {
     key: "emit",
     value: function emit(eventName) {
+      var _this2 = this;
       for (var _len2 = arguments.length, payload = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
         payload[_key2 - 1] = arguments[_key2];
       }
-      if (typeof eventName !== "string") {
-        throw new TypeError("the event name must be string type.");
+      var isArray = Array.isArray(eventName);
+      if (typeof eventName !== "string" || isArray) {
+        throw new TypeError("the event name must be of string or array type");
       }
-      var hanlders = this.eventBus[eventName];
-      if (hanlders) {
-        hanlders.forEach(function (hanlder) {
-          hanlder.eventCallback.apply(hanlder.pointer, payload);
+      if (isArray) {
+        eventName.forEach(function (key) {
+          if (typeof key !== "string") {
+            throw new TypeError("the event name must be string type.");
+          }
+          changeEmitHanlders(_this2.eventBus[key], payload);
         });
+        return;
       }
+      changeEmitHanlders(this.eventBus[eventName], payload);
     }
   }]);
   return JavascriptBus;
