@@ -1,6 +1,6 @@
 /**
- * javascript-bus v1.0.5
- * https://github.com/Mywbj/js-bus
+ * javascript-bus v1.0.6
+ * https://github.com/Mywbj/javascript-bus
  * @license MIT
  */
 (function (global, factory) {
