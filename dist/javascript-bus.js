@@ -1,5 +1,5 @@
 /**
- * javascript-bus v1.0.3
+ * javascript-bus v1.0.4
  * https://github.com/Mywbj/js-bus
  * @license MIT
  */
@@ -57,14 +57,6 @@
     throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method.");
   }
 
-  function changeEmitHanlders(hanlders, payload) {
-    if (hanlders) {
-      hanlders.forEach(function (hanlder) {
-        hanlder.eventCallback.apply(hanlder.pointer, payload);
-      });
-    }
-  }
-
   var JavascriptBus = /*#__PURE__*/function () {
     function JavascriptBus() {
       _classCallCheck(this, JavascriptBus);
@@ -89,8 +81,10 @@
           pointer: pointer
         });
 
-        // 返回一个取消订阅函数，调用它即可停止监听
-        // Returns an unsubscribe function Call it to stop listening.
+        /**
+         * 返回一个取消订阅函数，调用它即可停止监听
+         * Returns an unsubscribe function Call it to stop listening.
+         */
         return this.off.bind(this, eventName, eventCallback);
       }
     }, {
@@ -120,6 +114,9 @@
         }
         var hanlders = this.eventBus[eventName];
         if (hanlders) {
+          /**
+           * If you don't pass the function, it will delete all events from this subscription.
+           */
           if (typeof eventCallback !== "function") {
             delete this.eventBus[eventName];
             return;
@@ -151,11 +148,15 @@
             if (typeof key !== "string") {
               throw new TypeError("the event name must be string type.");
             }
-            changeEmitHanlders(_this2.eventBus[key], payload);
+            _this2.emit(_this2.eventBus[key], payload);
           });
           return;
         }
-        changeEmitHanlders(this.eventBus[eventName], payload);
+        if (hanlders) {
+          hanlders.forEach(function (hanlder) {
+            hanlder.eventCallback.apply(hanlder.pointer, payload);
+          });
+        }
       }
     }]);
     return JavascriptBus;

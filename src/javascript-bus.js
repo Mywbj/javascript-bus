@@ -1,4 +1,3 @@
-import { changeEmitHanlders } from './utils.js'
 class JavascriptBus {
   constructor() {
     this.eventBus = {}
@@ -21,8 +20,10 @@ class JavascriptBus {
 
     hanlders.push({ eventCallback, pointer })
 
-    // 返回一个取消订阅函数，调用它即可停止监听
-    // Returns an unsubscribe function Call it to stop listening.
+    /**
+     * 返回一个取消订阅函数，调用它即可停止监听
+     * Returns an unsubscribe function Call it to stop listening.
+     */
     return this.off.bind(this, eventName, eventCallback)
   }
 
@@ -50,10 +51,14 @@ class JavascriptBus {
 
     let hanlders = this.eventBus[eventName]
     if (hanlders) {
+      /**
+       * If you don't pass the function, it will delete all events from this subscription.
+       */
       if (typeof eventCallback !== "function") {
         delete this.eventBus[eventName]
         return
       }
+
       const backups = [...hanlders]
       backups.forEach((hanlder, index) => {
         if (hanlder.eventCallback === eventCallback) {
@@ -78,12 +83,16 @@ class JavascriptBus {
         if (typeof key !== "string") {
           throw new TypeError("the event name must be string type.")
         }
-        changeEmitHanlders(this.eventBus[key], payload)
+        this.emit(this.eventBus[key], payload)
       })
       return
     }
-
-    changeEmitHanlders(this.eventBus[eventName], payload)
+    
+    if (hanlders) {
+      hanlders.forEach(hanlder => {
+        hanlder.eventCallback.apply(hanlder.pointer, payload)
+      })
+    }
   }
 
 }
