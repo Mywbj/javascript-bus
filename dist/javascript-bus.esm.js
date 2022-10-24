@@ -142,10 +142,11 @@ var JavascriptBus = /*#__PURE__*/function () {
           if (typeof key !== "string") {
             throw new TypeError("the event name must be string type.");
           }
-          _this2.emit(_this2.eventBus[key], payload);
+          _this2.emit(key, payload);
         });
         return;
       }
+      var hanlders = this.eventBus[eventName];
       if (hanlders) {
         hanlders.forEach(function (hanlder) {
           hanlder.eventCallback.apply(hanlder.pointer, payload);

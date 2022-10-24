@@ -83,11 +83,12 @@ class JavascriptBus {
         if (typeof key !== "string") {
           throw new TypeError("the event name must be string type.")
         }
-        this.emit(this.eventBus[key], payload)
+        this.emit(key, payload)
       })
       return
     }
     
+    const hanlders = this.eventBus[eventName]
     if (hanlders) {
       hanlders.forEach(hanlder => {
         hanlder.eventCallback.apply(hanlder.pointer, payload)
