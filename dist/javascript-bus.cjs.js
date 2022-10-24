@@ -1,5 +1,5 @@
 /**
- * javascript-bus v1.0.4
+ * javascript-bus v1.0.5
  * https://github.com/Mywbj/js-bus
  * @license MIT
  */
