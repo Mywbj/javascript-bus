@@ -8,7 +8,7 @@ const pak = JSON.parse(fs.readFileSync('./package.json', 'utf8'))
 
 const banner = `/**
  * javascript-bus v${pak.version}
- * https://github.com/Mywbj/js-bus
+ * https://github.com/Mywbj/javascript-bus
  * @license MIT
  */`
 
@@ -18,17 +18,17 @@ const config = {
   input: './src/javascript-bus.js',
   output: [
     {
-      file: './dist/javascript-bus.esm'+min+'.js',
+      file: `./dist/javascript-bus.esm${min}.js`,
       format: 'es',
       banner
     },
     {
-      file: './dist/javascript-bus.cjs'+min+'.js',
+      file: `./dist/javascript-bus.cjs${min}.js`,
       format: 'cjs',
       banner
     },
     {
-      file: './dist/javascript-bus'+min+'.js',
+      file: `./dist/javascript-bus${min}.js`,
       format: 'umd',
       name: 'JavascriptBus',
       banner,
